@@ -65,15 +65,16 @@ const StatusCheckForm: React.FC = () => {
         Swal.fire({
           icon: 'error',
           title: 'ไม่พบข้อมูล',
-          text: response.message,
+          text: response.message || 'กรุณาตรวจสอบข้อมูลที่กรอกและลองใหม่อีกครั้ง',
           confirmButtonColor: '#E21C23',
         });
       }
     } catch (error) {
+      console.error('Error in form submission:', error);
       Swal.fire({
         icon: 'error',
         title: 'เกิดข้อผิดพลาด',
-        text: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาลองอีกครั้ง',
+        text: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาลองอีกครั้งในภายหลัง',
         confirmButtonColor: '#E21C23',
       });
     } finally {

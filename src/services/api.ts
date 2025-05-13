@@ -16,6 +16,12 @@ export const submitPhone = async (phone: string, apiKey: string) => {
     return response.data;
   } catch (error) {
     console.error('Error submitting phone:', error);
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return {
+        success: false,
+        message: 'API endpoint ไม่พบ กรุณาตรวจสอบ URL ที่ถูกต้อง',
+      };
+    }
     return {
       success: false,
       message: 'เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์ กรุณาลองใหม่อีกครั้ง',
@@ -29,6 +35,20 @@ export const checkStatusByApiKey = async (apiKey: string) => {
     return response.data;
   } catch (error) {
     console.error('Error checking status by API key:', error);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        return {
+          success: false,
+          message: 'ไม่พบข้อมูล API key นี้ในระบบ',
+        };
+      }
+      if (error.code === 'ERR_NETWORK') {
+        return {
+          success: false,
+          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
+        };
+      }
+    }
     return {
       success: false,
       message: 'เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์ กรุณาลองใหม่อีกครั้ง',
@@ -44,6 +64,20 @@ export const checkStatusByPhone = async (phone: string) => {
     return data;
   } catch (error) {
     console.error('Error checking status by phone:', error);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        return {
+          success: false,
+          message: 'ไม่พบเบอร์นี้ในระบบ กรุณาลงทะเบียนก่อนใช้งาน',
+        };
+      }
+      if (error.code === 'ERR_NETWORK') {
+        return {
+          success: false,
+          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
+        };
+      }
+    }
     return {
       success: false,
       message: 'เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์ กรุณาลองใหม่อีกครั้ง',
