@@ -42,9 +42,6 @@ const HomeScreen: React.FC<{ onNavigate: (tab: string) => void }> = ({ onNavigat
             )}
           </div>
         </div>
-        <p className="text-sm text-gray-600">
-          ระบบดักซองอังเปา TrueMoney พร้อมให้บริการ เพียงลงทะเบียนเบอร์โทรศัพท์ของคุณและรับเงินจากซองอังเปาโดยอัตโนมัติ
-        </p>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
