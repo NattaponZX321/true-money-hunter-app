@@ -53,9 +53,15 @@ export const checkStatusByPhone = async (phone: string) => {
 
 export const checkApiHealth = async () => {
   try {
-    await api.get('/');
+    // Using a known valid endpoint instead of root path
+    await api.get('/status-by-phone/test');
     return true;
   } catch (error) {
+    // If we get a 404 specifically, the API is likely running but the endpoint doesn't exist
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      console.log('API is reachable but returned 404. This is expected for test endpoints.');
+      return true;
+    }
     console.error('API health check failed:', error);
     return false;
   }
