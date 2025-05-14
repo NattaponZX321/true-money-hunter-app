@@ -4,14 +4,39 @@ import React from 'react';
 const Logo: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center py-4">
-      <div className="relative bg-gradient-to-br from-blue-500 to-indigo-700 w-16 h-16 rounded-full flex items-center justify-center shadow-lg animate-pulse-scale">
-        <span className="text-white text-2xl font-bold">TMC</span>
-        <div className="absolute -bottom-1 -right-1 bg-amber-300 w-6 h-6 rounded-full flex items-center justify-center animate-glow">
+      <div className="relative bg-gradient-to-br from-blue-600 to-indigo-900 w-16 h-16 rounded-lg flex items-center justify-center shadow-lg">
+        <div className="absolute inset-0 opacity-30">
+          <div className="w-full h-full binary-bg"></div>
+        </div>
+        
+        {/* Circuit-like patterns */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-2 left-2 w-3 h-3 border rounded-full border-blue-300"></div>
+          <div className="absolute bottom-2 right-2 w-3 h-3 border rounded-full border-blue-300"></div>
+          <div className="absolute top-2 right-6 w-2 h-2 border-t border-r border-blue-300"></div>
+          <div className="absolute bottom-2 left-6 w-2 h-2 border-b border-l border-blue-300"></div>
+        </div>
+        
+        <span className="text-white text-2xl font-bold font-mono relative">
+          TMC
+          <span className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-blue-300 rounded-full animate-ping"></span>
+        </span>
+        
+        <div className="absolute -bottom-1 -right-1 bg-amber-300 w-6 h-6 rounded-sm flex items-center justify-center animate-pulse">
           <span className="text-slate-800 text-xs font-bold">$</span>
         </div>
       </div>
-      <h1 className="mt-2 text-xl font-bold gradient-text">TrueMoney Catcher</h1>
-      <p className="text-sm text-blue-300">ดักซองอังเปาแบบมืออาชีพ</p>
+      
+      <h1 className="mt-2 text-xl font-bold flex items-center">
+        <span className="text-blue-400 mr-1">TRUE</span>
+        <span className="text-white">MONEY</span>
+        <span className="text-blue-400 ml-1">CATCHER</span>
+      </h1>
+      
+      <div className="text-xs flex items-center space-x-2 mt-1 text-blue-300/80">
+        <span className="bg-blue-500/20 px-1.5 py-0.5 rounded font-mono">v2.1</span>
+        <span>ระบบดักซองอังเปาอัตโนมัติ</span>
+      </div>
     </div>
   );
 };
