@@ -16,7 +16,7 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ activeTab, setActiv
   ];
 
   return (
-    <div className="bottom-nav shadow-lg backdrop-blur-md bg-indigo-600/80">
+    <div className="bottom-nav shadow-lg backdrop-blur-md bg-gray-900/80 border-t border-gray-700/50">
       {navItems.map((item) => (
         <button
           key={item.id}
