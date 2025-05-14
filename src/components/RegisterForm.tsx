@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { submitPhone } from '../services/api';
 import { isValidThaiPhone, isValidApiKey } from '../utils/validators';
 import Swal from 'sweetalert2';
+import { Smartphone, Key, CheckCircle } from 'lucide-react';
 
 const RegisterForm: React.FC = () => {
   const [phone, setPhone] = useState('');
@@ -45,7 +46,9 @@ const RegisterForm: React.FC = () => {
           icon: 'success',
           title: 'สำเร็จ!',
           text: response.message,
-          confirmButtonColor: '#E21C23',
+          confirmButtonColor: '#3b82f6',
+          background: '#1e293b',
+          color: '#ffffff',
         });
         setPhone('');
         setApiKey('');
@@ -54,7 +57,9 @@ const RegisterForm: React.FC = () => {
           icon: 'error',
           title: 'เกิดข้อผิดพลาด',
           text: response.message,
-          confirmButtonColor: '#E21C23',
+          confirmButtonColor: '#3b82f6',
+          background: '#1e293b',
+          color: '#ffffff',
         });
       }
     } catch (error) {
@@ -62,7 +67,9 @@ const RegisterForm: React.FC = () => {
         icon: 'error',
         title: 'เกิดข้อผิดพลาด',
         text: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาลองอีกครั้ง',
-        confirmButtonColor: '#E21C23',
+        confirmButtonColor: '#3b82f6',
+        background: '#1e293b',
+        color: '#ffffff',
       });
     } finally {
       setIsLoading(false);
@@ -70,36 +77,46 @@ const RegisterForm: React.FC = () => {
   };
 
   return (
-    <div className="card-container animate-fade-in">
-      <h2 className="text-xl font-bold mb-4">ลงทะเบียนเบอร์ดักซอง</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
+    <div className="glass-card animate-fade-in">
+      <h2 className="text-xl font-bold mb-6 gradient-text">ลงทะเบียนเบอร์ดักซอง</h2>
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div className="mb-4 relative">
           <label htmlFor="phone" className="form-label">
             เบอร์โทรศัพท์
           </label>
-          <input
-            id="phone"
-            type="tel"
-            className="form-input"
-            placeholder="เช่น 0812345678"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
+          <div className="relative">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400">
+              <Smartphone size={18} />
+            </div>
+            <input
+              id="phone"
+              type="tel"
+              className="form-input pl-10"
+              placeholder="เช่น 0812345678"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
           {errors.phone && <p className="form-error">{errors.phone}</p>}
         </div>
         
-        <div className="mb-6">
+        <div className="mb-6 relative">
           <label htmlFor="apiKey" className="form-label">
             API Key
           </label>
-          <input
-            id="apiKey"
-            type="text"
-            className="form-input"
-            placeholder="กรอก API key ของคุณ"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-          />
+          <div className="relative">
+            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400">
+              <Key size={18} />
+            </div>
+            <input
+              id="apiKey"
+              type="text"
+              className="form-input pl-10"
+              placeholder="กรอก API key ของคุณ"
+              value={apiKey}
+              onChange={(e) => setApiKey(e.target.value)}
+            />
+          </div>
           {errors.apiKey && <p className="form-error">{errors.apiKey}</p>}
         </div>
         
@@ -113,7 +130,10 @@ const RegisterForm: React.FC = () => {
               กำลังลงทะเบียน...
             </>
           ) : (
-            'ลงทะเบียน'
+            <>
+              <CheckCircle size={18} className="mr-2" />
+              ลงทะเบียน
+            </>
           )}
         </button>
       </form>

@@ -23,8 +23,13 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ activeTab, setActiv
           className={`nav-item ${activeTab === item.id ? 'active' : ''}`}
           onClick={() => setActiveTab(item.id)}
         >
-          <item.icon size={20} className={`nav-icon ${activeTab === item.id ? 'text-tmoney-red' : ''}`} />
-          <span>{item.label}</span>
+          <div className={`relative ${activeTab === item.id ? 'before:absolute before:w-full before:h-0.5 before:bg-blue-400 before:bottom-0 before:-mb-2 before:rounded-full before:shadow-md before:shadow-blue-400/50' : ''}`}>
+            <item.icon 
+              size={20} 
+              className={`nav-icon ${activeTab === item.id ? 'text-blue-400' : ''} transition-all duration-300`} 
+            />
+          </div>
+          <span className="transition-all duration-300">{item.label}</span>
         </button>
       ))}
     </div>

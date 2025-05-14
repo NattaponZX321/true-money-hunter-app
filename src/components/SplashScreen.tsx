@@ -24,7 +24,10 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         <div className="animate-bounce-limited mb-4">
           <Logo />
         </div>
-        <div className="loading-spinner mt-4"></div>
+        <div className="mt-6">
+          <div className="loading-spinner"></div>
+        </div>
+        <div className="mt-6 text-blue-400 animate-pulse text-sm">กำลังโหลด...</div>
       </div>
     </div>
   );
