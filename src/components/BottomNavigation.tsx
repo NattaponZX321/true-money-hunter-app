@@ -16,7 +16,7 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ activeTab, setActiv
   ];
 
   return (
-    <div className="bottom-nav shadow-lg backdrop-blur-md bg-slate-900/80">
+    <div className="bottom-nav shadow-lg backdrop-blur-md bg-indigo-600/80">
       {navItems.map((item) => (
         <button
           key={item.id}
@@ -25,12 +25,12 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ activeTab, setActiv
         >
           <div className={`relative ${
             activeTab === item.id 
-              ? 'before:absolute before:w-7 before:h-0.5 before:bg-blue-400 before:bottom-0 before:-mb-1.5 before:rounded-full before:left-1/2 before:-translate-x-1/2 before:shadow-[0_0_8px_rgba(59,130,246,0.6)]' 
+              ? 'before:absolute before:w-7 before:h-0.5 before:bg-white before:bottom-0 before:-mb-1.5 before:rounded-full before:left-1/2 before:-translate-x-1/2 before:shadow-[0_0_8px_rgba(255,255,255,0.8)]' 
               : ''
           }`}>
             <item.icon 
               size={18} 
-              className={`nav-icon ${activeTab === item.id ? 'text-blue-400' : ''} transition-all duration-300`} 
+              className={`nav-icon ${activeTab === item.id ? 'text-white' : ''} transition-all duration-300`} 
             />
           </div>
           <span className="transition-all duration-300 text-[10px] font-mono tracking-wider mt-0.5">
@@ -38,7 +38,7 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ activeTab, setActiv
           </span>
           
           {activeTab === item.id && (
-            <span className="absolute top-0 left-1/2 -translate-x-1/2 -mt-1 w-8 h-0.5 bg-blue-400/50 rounded-full blur-sm"></span>
+            <span className="absolute top-0 left-1/2 -translate-x-1/2 -mt-1 w-8 h-0.5 bg-white/70 rounded-full blur-sm"></span>
           )}
         </button>
       ))}
