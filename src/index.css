@@ -5,12 +5,12 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
     --primary: 0 75% 50%;
     --primary-foreground: 0 0% 98%;
     --secondary: 240 5.9% 10%;
@@ -32,20 +32,22 @@
   }
   
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-dark-tech text-white antialiased;
     font-family: 'Prompt', 'Sarabun', sans-serif;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23333333' fill-opacity='0.15'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
   
   .app-container {
-    @apply max-w-md mx-auto min-h-screen relative pb-16;
+    @apply max-w-md mx-auto min-h-screen relative pb-16 backdrop-blur-sm bg-dark-tech/80;
   }
   
   .bottom-nav {
-    @apply fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around items-center py-2 max-w-md mx-auto;
+    @apply fixed bottom-0 left-0 right-0 bg-dark-glass border-t border-white/10 flex justify-around items-center py-2 max-w-md mx-auto;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
   }
   
   .nav-item {
-    @apply flex flex-col items-center justify-center text-xs text-gray-600 pt-1 pb-0.5 w-full;
+    @apply flex flex-col items-center justify-center text-xs text-gray-400 pt-1 pb-0.5 w-full;
   }
   
   .nav-item.active {
@@ -57,19 +59,21 @@
   }
 
   .card-container {
-    @apply bg-white rounded-xl shadow-md p-5 mb-4 border border-gray-100;
+    @apply bg-dark-glass rounded-xl shadow-md p-5 mb-4 border border-white/10 backdrop-blur-sm;
   }
   
   .form-input {
-    @apply w-full rounded-lg border border-gray-300 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-tmoney-red;
+    @apply w-full rounded-lg border border-white/20 p-3 text-sm focus:outline-none focus:ring-2 focus:ring-tmoney-red bg-dark-input text-white;
   }
   
   .btn-primary {
     @apply bg-tmoney-red hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg w-full transition duration-300 flex items-center justify-center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(226, 28, 35, 0.5);
   }
   
   .btn-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-6 rounded-lg w-full transition duration-300;
+    @apply bg-dark-glass hover:bg-gray-700 text-white font-semibold py-3 px-6 rounded-lg w-full transition duration-300 border border-white/10;
   }
 
   .status-badge {
@@ -77,38 +81,75 @@
   }
   
   .status-success {
-    @apply bg-green-100 text-green-800;
+    @apply bg-green-900/50 text-green-300 border border-green-500/30;
   }
   
   .status-pending {
-    @apply bg-yellow-100 text-yellow-800;
+    @apply bg-yellow-900/50 text-yellow-300 border border-yellow-500/30;
   }
   
   .status-error {
-    @apply bg-red-100 text-red-800;
+    @apply bg-red-900/50 text-red-300 border border-red-500/30;
   }
   
   .angpao-card {
-    @apply bg-gradient-to-br from-tmoney-red to-red-700 text-white rounded-xl p-5 relative overflow-hidden;
+    @apply bg-gradient-to-br from-tmoney-red to-red-900 text-white rounded-xl p-5 relative overflow-hidden shadow-lg border border-red-500/20;
+    box-shadow: 0 8px 32px rgba(226, 28, 35, 0.3);
   }
   
   .gold-accent {
     @apply text-tmoney-gold;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
   }
   
   .form-label {
-    @apply block text-sm font-medium text-gray-700 mb-1;
+    @apply block text-sm font-medium text-gray-300 mb-1;
   }
   
   .form-error {
-    @apply text-red-500 text-xs mt-1;
+    @apply text-red-400 text-xs mt-1;
   }
   
   .splash-screen {
-    @apply fixed inset-0 flex items-center justify-center bg-white z-50;
+    @apply fixed inset-0 flex items-center justify-center bg-dark-tech z-50;
   }
   
   .loading-spinner {
     @apply w-10 h-10 border-4 border-tmoney-red border-t-transparent rounded-full animate-spin;
+    filter: drop-shadow(0 0 8px rgba(226, 28, 35, 0.5));
+  }
+  
+  /* High-tech glow effects */
+  .tech-glow {
+    @apply relative;
+  }
+  
+  .tech-glow::after {
+    @apply absolute inset-0 rounded-xl opacity-40;
+    content: '';
+    background: linear-gradient(45deg, rgba(226, 28, 35, 0) 70%, rgba(226, 28, 35, 0.8) 100%);
+    filter: blur(8px);
+    z-index: -1;
+  }
+  
+  /* Tech patterns */
+  .tech-pattern {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .tech-pattern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: -1;
   }
 }
+

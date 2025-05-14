@@ -20,22 +20,22 @@ const HomeScreen: React.FC<{ onNavigate: (tab: string) => void }> = ({ onNavigat
 
   return (
     <div className="animate-fade-in space-y-4">
-      <div className="card-container">
+      <div className="card-container tech-pattern">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold">สถานะ API</h2>
+          <h2 className="text-xl font-bold text-white">สถานะ API</h2>
           <div className="flex items-center">
             {apiStatus === null ? (
-              <span className="text-yellow-500 text-sm flex items-center">
-                <div className="w-2 h-2 bg-yellow-500 rounded-full mr-2 animate-pulse"></div>
+              <span className="text-yellow-300 text-sm flex items-center">
+                <div className="w-2 h-2 bg-yellow-400 rounded-full mr-2 animate-pulse"></div>
                 กำลังตรวจสอบ...
               </span>
             ) : apiStatus ? (
-              <span className="text-green-500 text-sm flex items-center">
+              <span className="text-green-400 text-sm flex items-center">
                 <CheckCircle size={16} className="mr-1" />
                 ใช้งานได้
               </span>
             ) : (
-              <span className="text-red-500 text-sm flex items-center">
+              <span className="text-red-400 text-sm flex items-center">
                 <XCircle size={16} className="mr-1" />
                 ไม่สามารถเชื่อมต่อได้
               </span>
@@ -46,15 +46,15 @@ const HomeScreen: React.FC<{ onNavigate: (tab: string) => void }> = ({ onNavigat
 
       <div className="grid grid-cols-2 gap-4">
         <div 
-          className="card-container bg-gradient-to-br from-red-50 to-white hover:shadow-md transition-shadow cursor-pointer"
+          className="card-container bg-gradient-to-br from-dark-glass to-dark-tech hover:shadow-lg transition-shadow cursor-pointer border border-white/10 animate-glow"
           onClick={() => onNavigate('register')}
         >
           <div className="text-center">
-            <div className="w-12 h-12 bg-red-100 rounded-full mx-auto flex items-center justify-center mb-2">
+            <div className="w-12 h-12 bg-tmoney-red/20 rounded-full mx-auto flex items-center justify-center mb-2">
               <Plus size={24} className="text-tmoney-red" />
             </div>
-            <h3 className="font-semibold">เพิ่มเบอร์ดักซอง</h3>
-            <p className="text-xs text-gray-500 mt-1">ลงทะเบียนเบอร์ใหม่</p>
+            <h3 className="font-semibold text-white">เพิ่มเบอร์ดักซอง</h3>
+            <p className="text-xs text-gray-400 mt-1">ลงทะเบียนเบอร์ใหม่</p>
             <div className="mt-2 text-tmoney-red flex items-center justify-center text-sm">
               <span>เริ่มเลย</span>
               <ArrowRight size={14} className="ml-1" />
@@ -63,16 +63,16 @@ const HomeScreen: React.FC<{ onNavigate: (tab: string) => void }> = ({ onNavigat
         </div>
 
         <div 
-          className="card-container bg-gradient-to-br from-blue-50 to-white hover:shadow-md transition-shadow cursor-pointer"
+          className="card-container bg-gradient-to-br from-dark-glass to-dark-tech hover:shadow-lg transition-shadow cursor-pointer border border-white/10"
           onClick={() => onNavigate('status')}
         >
           <div className="text-center">
-            <div className="w-12 h-12 bg-blue-100 rounded-full mx-auto flex items-center justify-center mb-2">
-              <Search size={24} className="text-blue-500" />
+            <div className="w-12 h-12 bg-blue-900/30 rounded-full mx-auto flex items-center justify-center mb-2">
+              <Search size={24} className="text-blue-400" />
             </div>
-            <h3 className="font-semibold">เช็คสถานะ</h3>
-            <p className="text-xs text-gray-500 mt-1">ตรวจสอบยอดและหมดอายุ</p>
-            <div className="mt-2 text-blue-500 flex items-center justify-center text-sm">
+            <h3 className="font-semibold text-white">เช็คสถานะ</h3>
+            <p className="text-xs text-gray-400 mt-1">ตรวจสอบยอดและหมดอายุ</p>
+            <div className="mt-2 text-blue-400 flex items-center justify-center text-sm">
               <span>ตรวจสอบ</span>
               <ArrowRight size={14} className="ml-1" />
             </div>
@@ -80,7 +80,7 @@ const HomeScreen: React.FC<{ onNavigate: (tab: string) => void }> = ({ onNavigat
         </div>
       </div>
 
-      <div className="angpao-card">
+      <div className="angpao-card tech-glow">
         <div className="absolute top-2 right-2 opacity-20">
           <div className="w-16 h-16 rounded-full border-4 border-tmoney-gold"></div>
         </div>
@@ -95,7 +95,7 @@ const HomeScreen: React.FC<{ onNavigate: (tab: string) => void }> = ({ onNavigat
         
         <button 
           onClick={() => onNavigate('help')} 
-          className="bg-white text-tmoney-red text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+          className="bg-black/30 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-black/50 transition-colors border border-white/10"
         >
           เรียนรู้เพิ่มเติม
         </button>
