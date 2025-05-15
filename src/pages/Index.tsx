@@ -7,7 +7,6 @@ import RegisterForm from '../components/RegisterForm';
 import StatusCheckForm from '../components/StatusCheckForm';
 import HelpInstructions from '../components/HelpInstructions';
 import HomeScreen from '../components/HomeScreen';
-import BotLoginForm from '../components/BotLoginForm';
 import '@fontsource/prompt/400.css';
 import '@fontsource/prompt/500.css';
 import '@fontsource/prompt/700.css';
@@ -32,8 +31,6 @@ const Index = () => {
         return <StatusCheckForm />;
       case 'help':
         return <HelpInstructions />;
-      case 'botlogin':
-        return <BotLoginForm />;
       default:
         return <HomeScreen onNavigate={setActiveTab} />;
     }
@@ -45,8 +42,7 @@ const Index = () => {
       home: 'TrueMoney Catcher | ดักซองอังเปา',
       register: 'เพิ่มเบอร์ดักซอง | TrueMoney Catcher',
       status: 'เช็คสถานะ | TrueMoney Catcher',
-      help: 'วิธีใช้งาน | TrueMoney Catcher',
-      botlogin: 'เข้าสู่ระบบบอท | TrueMoney Catcher'
+      help: 'วิธีใช้งาน | TrueMoney Catcher'
     };
     document.title = titles[activeTab] || titles.home;
   }, [activeTab]);

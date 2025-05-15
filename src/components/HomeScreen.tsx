@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import { checkApiHealth } from '../services/api';
-import { CheckCircle, XCircle, ArrowRight, Activity, Search, Terminal, Lock, AlertTriangle, LogIn } from 'lucide-react';
+import { CheckCircle, XCircle, ArrowRight, Activity, Search, Terminal, Lock, AlertTriangle } from 'lucide-react';
 
 const HomeScreen: React.FC<{ onNavigate: (tab: string) => void }> = ({ onNavigate }) => {
   const [apiStatus, setApiStatus] = useState<boolean | null>(null);
@@ -107,42 +108,6 @@ const HomeScreen: React.FC<{ onNavigate: (tab: string) => void }> = ({ onNavigat
             <p className="text-xs text-gray-400 mt-1 font-mono">Monitor & verify</p>
             <div className="mt-2 text-blue-400 flex items-center justify-center text-sm">
               <span>SCAN</span>
-              <ArrowRight size={14} className="ml-1" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 gap-4">
-        <div 
-          className="cyber-card hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all cursor-pointer hover:scale-[1.02] duration-300"
-          onClick={() => onNavigate('botlogin')}
-        >
-          <div className="text-center">
-            <div className="w-12 h-12 bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-full mx-auto flex items-center justify-center mb-2 border border-blue-500/30">
-              <LogIn size={24} className="text-blue-400" />
-            </div>
-            <h3 className="font-semibold text-gray-200">BOT LOGIN</h3>
-            <p className="text-xs text-gray-400 mt-1 font-mono">Access bot system</p>
-            <div className="mt-2 text-blue-400 flex items-center justify-center text-sm">
-              <span>LOGIN</span>
-              <ArrowRight size={14} className="ml-1" />
-            </div>
-          </div>
-        </div>
-
-        <div 
-          className="cyber-card hover:shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all cursor-pointer hover:scale-[1.02] duration-300"
-          onClick={() => onNavigate('help')}
-        >
-          <div className="text-center">
-            <div className="w-12 h-12 bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-full mx-auto flex items-center justify-center mb-2 border border-blue-500/30">
-              <Terminal size={24} className="text-blue-400" />
-            </div>
-            <h3 className="font-semibold text-gray-200">DOCS</h3>
-            <p className="text-xs text-gray-400 mt-1 font-mono">Help & guides</p>
-            <div className="mt-2 text-blue-400 flex items-center justify-center text-sm">
-              <span>READ</span>
               <ArrowRight size={14} className="ml-1" />
             </div>
           </div>

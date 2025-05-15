@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 
 const API_BASE_URL = 'https://4c78f910-fb19-49ef-b670-077fb079f6f8-00-1qignk7q963ov.pike.replit.dev';
@@ -68,60 +69,6 @@ export const checkStatusByPhone = async (phone: string) => {
         return {
           success: false,
           message: 'ไม่พบเบอร์นี้ในระบบ กรุณาลงทะเบียนก่อนใช้งาน',
-        };
-      }
-      if (error.code === 'ERR_NETWORK') {
-        return {
-          success: false,
-          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
-        };
-      }
-    }
-    return {
-      success: false,
-      message: 'เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์ กรุณาลองใหม่อีกครั้ง',
-    };
-  }
-};
-
-export const botLogin = async (phone: string) => {
-  try {
-    const response = await api.post('/bot-login', { phone });
-    return response.data;
-  } catch (error) {
-    console.error('Error during bot login:', error);
-    if (axios.isAxiosError(error)) {
-      if (error.response?.status === 404) {
-        return {
-          success: false,
-          message: 'API endpoint ไม่พบ กรุณาตรวจสอบ URL ที่ถูกต้อง',
-        };
-      }
-      if (error.code === 'ERR_NETWORK') {
-        return {
-          success: false,
-          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
-        };
-      }
-    }
-    return {
-      success: false,
-      message: 'เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์ กรุณาลองใหม่อีกครั้ง',
-    };
-  }
-};
-
-export const botVerify = async (phone: string, code: string) => {
-  try {
-    const response = await api.post('/bot-login', { phone, code });
-    return response.data;
-  } catch (error) {
-    console.error('Error during bot verification:', error);
-    if (axios.isAxiosError(error)) {
-      if (error.response?.status === 404) {
-        return {
-          success: false,
-          message: 'API endpoint ไม่พบ กรุณาตรวจสอบ URL ที่ถูกต้อง',
         };
       }
       if (error.code === 'ERR_NETWORK') {
