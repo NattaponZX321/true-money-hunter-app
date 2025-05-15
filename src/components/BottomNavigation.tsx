@@ -9,10 +9,17 @@ interface BottomNavigationProps {
 
 const BottomNavigation: React.FC<BottomNavigationProps> = ({ activeTab, setActiveTab }) => {
   const navItems = [
+<<<<<<< HEAD
     { id: 'home', label: 'หน้าหลัก', icon: Home },
     { id: 'register', label: 'เพิ่มเบอร์', icon: Plus },
     { id: 'status', label: 'สถานะ', icon: Search },
     { id: 'help', label: 'วิธีใช้', icon: HelpCircle },
+=======
+    { id: 'home', label: 'HOME', icon: Home },
+    { id: 'register', label: 'ADD', icon: Plus },
+    { id: 'status', label: 'STATUS', icon: Search },
+    { id: 'help', label: 'HELP', icon: HelpCircle },
+>>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
   ];
 
   return (

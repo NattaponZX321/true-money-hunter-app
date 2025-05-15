@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { checkStatusByApiKey, checkStatusByPhone, checkApiHealth } from '../services/api';
 import { isValidThaiPhone, isValidApiKey, formatThaiDate, formatRemainingTime } from '../utils/validators';
@@ -6,6 +7,12 @@ import { formatRemainingTimeRealtime, formatTimeSegment } from '../utils/timeFor
 import Swal from 'sweetalert2';
 import { CheckCircle, XCircle, User, CreditCard, Calendar, Clock, Gift } from 'lucide-react';
 import './StatusCheckForm.css';
+=======
+import React, { useState } from 'react';
+import { checkStatusByApiKey, checkStatusByPhone } from '../services/api';
+import { isValidThaiPhone, isValidApiKey, formatThaiDate, formatRemainingTime } from '../utils/validators';
+import Swal from 'sweetalert2';
+>>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
 
 interface StatusData {
   success: boolean;
@@ -26,6 +33,7 @@ const StatusCheckForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [statusData, setStatusData] = useState<StatusData | null>(null);
   const [error, setError] = useState('');
+<<<<<<< HEAD
   const [currentRemainingTime, setCurrentRemainingTime] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
 
   useEffect(() => {
@@ -79,6 +87,8 @@ const StatusCheckForm: React.FC = () => {
       return () => clearInterval(timer);
     }
   }, [statusData]);
+=======
+>>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
 
   const validateInput = (): boolean => {
     setError('');
@@ -196,12 +206,17 @@ const StatusCheckForm: React.FC = () => {
       </div>
 
       {statusData && statusData.success && (
+<<<<<<< HEAD
         <div className="status-info-card animate-fade-in">
+=======
+        <div className="angpao-card animate-fade-in">
+>>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
           <div className="absolute top-0 right-0 w-20 h-20 opacity-10">
             <div className="w-full h-full border-4 border-tmoney-gold rounded-full"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 border-4 border-tmoney-gold rounded-full"></div>
           </div>
           
+<<<<<<< HEAD
           <div className="status-info-header">
             <span className="status-info-icon">
               <Gift size={24} color="#FFD700" />
@@ -260,6 +275,36 @@ const StatusCheckForm: React.FC = () => {
           <div className="status-badge-container">
             <span className="status-badge-active">
               <CheckCircle size={16} className="mr-2" />
+=======
+          <h3 className="text-lg font-bold mb-3 gold-accent">ข้อมูลการดักซอง</h3>
+          
+          <div className="mb-2 flex items-center">
+            <span className="text-white/70 w-32">เบอร์โทรศัพท์:</span>
+            <span className="font-semibold">{statusData.phone}</span>
+          </div>
+          
+          <div className="mb-2 flex items-center">
+            <span className="text-white/70 w-32">ยอดเงินที่ดักได้:</span>
+            <span className="font-semibold gold-accent">{statusData.totalAmount} บาท</span>
+          </div>
+          
+          <div className="mb-2 flex items-center">
+            <span className="text-white/70 w-32">วันหมดอายุ:</span>
+            <span className="font-semibold">
+              {statusData.expiresAt ? formatThaiDate(statusData.expiresAt) : '-'}
+            </span>
+          </div>
+          
+          <div className="mb-1 flex items-center">
+            <span className="text-white/70 w-32">เวลาคงเหลือ:</span>
+            <span className="font-semibold">
+              {statusData.remainingTime ? formatRemainingTime(statusData.remainingTime) : '-'}
+            </span>
+          </div>
+          
+          <div className="mt-4 text-right">
+            <span className="status-badge bg-green-700 text-white">
+>>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
               ใช้งานได้
             </span>
           </div>

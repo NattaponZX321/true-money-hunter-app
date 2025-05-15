@@ -3,15 +3,21 @@ import axios from 'axios';
 
 const API_BASE_URL = 'https://4c78f910-fb19-49ef-b670-077fb079f6f8-00-1qignk7q963ov.pike.replit.dev';
 
+<<<<<<< HEAD
 // Set a reasonable timeout for API requests to avoid long waits
 const TIMEOUT_MS = 5000;
 
+=======
+>>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
 const api = axios.create({
   baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
+<<<<<<< HEAD
   timeout: TIMEOUT_MS, // 5 seconds timeout for all requests
+=======
+>>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
 });
 
 export const submitPhone = async (phone: string, apiKey: string) => {
@@ -91,6 +97,7 @@ export const checkStatusByPhone = async (phone: string) => {
 
 export const checkApiHealth = async () => {
   try {
+<<<<<<< HEAD
     // Try to hit the base API URL first (this should work if server is up)
     await api.get('/');
     return true;
@@ -131,6 +138,19 @@ export const checkApiHealth = async () => {
         return false;
       }
     }
+=======
+    // Using a known valid endpoint instead of root path
+    await api.get('/status-by-phone/test');
+    return true;
+  } catch (error) {
+    // If we get a 404 specifically, the API is likely running but the endpoint doesn't exist
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      console.log('API is reachable but returned 404. This is expected for test endpoints.');
+      return true;
+    }
+    console.error('API health check failed:', error);
+    return false;
+>>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
   }
 };
 
