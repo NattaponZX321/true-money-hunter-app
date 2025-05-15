@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Home, Plus, Search, HelpCircle } from 'lucide-react';
+import { Home, Plus, Search, HelpCircle, LogIn } from 'lucide-react';
 
 interface BottomNavigationProps {
   activeTab: string;
@@ -12,6 +12,7 @@ const BottomNavigation: React.FC<BottomNavigationProps> = ({ activeTab, setActiv
     { id: 'home', label: 'HOME', icon: Home },
     { id: 'register', label: 'ADD', icon: Plus },
     { id: 'status', label: 'STATUS', icon: Search },
+    { id: 'botlogin', label: 'BOT', icon: LogIn },
     { id: 'help', label: 'HELP', icon: HelpCircle },
   ];
 
