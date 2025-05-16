@@ -39,17 +39,10 @@ const Index = () => {
   // Update document title to reflect the active tab
   useEffect(() => {
     const titles: Record<string, string> = {
-<<<<<<< HEAD
-      home: 'Cybersafe Gift TW Telegram | ดักซองอังเปา',
-      register: 'เพิ่มเบอร์ดักซอง | Cybersafe Gift TW',
-      status: 'เช็คสถานะ | Cybersafe Gift TW',
-      help: 'วิธีใช้งาน | Cybersafe Gift TW'
-=======
       home: 'TrueMoney Catcher | ดักซองอังเปา',
       register: 'เพิ่มเบอร์ดักซอง | TrueMoney Catcher',
       status: 'เช็คสถานะ | TrueMoney Catcher',
       help: 'วิธีใช้งาน | TrueMoney Catcher'
->>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
     };
     document.title = titles[activeTab] || titles.home;
   }, [activeTab]);

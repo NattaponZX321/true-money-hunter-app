@@ -11,11 +11,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@capacitor/android": "^7.2.0",
-    "@capacitor/core": "^7.2.0",
-=======
->>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
     "@fontsource/prompt": "^5.2.6",
     "@fontsource/sarabun": "^5.0.8",
     "@hookform/resolvers": "^3.9.0",
@@ -71,10 +66,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-<<<<<<< HEAD
-    "@capacitor/cli": "^7.2.0",
-=======
->>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
     "@eslint/js": "^9.9.0",
     "@tailwindcss/typography": "^0.5.15",
     "@types/node": "^22.5.5",

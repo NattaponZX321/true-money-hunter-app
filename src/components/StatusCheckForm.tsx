@@ -1,18 +1,8 @@
 
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react';
-import { checkStatusByApiKey, checkStatusByPhone, checkApiHealth } from '../services/api';
-import { isValidThaiPhone, isValidApiKey, formatThaiDate, formatRemainingTime } from '../utils/validators';
-import { formatRemainingTimeRealtime, formatTimeSegment } from '../utils/timeFormatter';
-import Swal from 'sweetalert2';
-import { CheckCircle, XCircle, User, CreditCard, Calendar, Clock, Gift } from 'lucide-react';
-import './StatusCheckForm.css';
-=======
 import React, { useState } from 'react';
 import { checkStatusByApiKey, checkStatusByPhone } from '../services/api';
 import { isValidThaiPhone, isValidApiKey, formatThaiDate, formatRemainingTime } from '../utils/validators';
 import Swal from 'sweetalert2';
->>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
 
 interface StatusData {
   success: boolean;
@@ -33,62 +23,6 @@ const StatusCheckForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [statusData, setStatusData] = useState<StatusData | null>(null);
   const [error, setError] = useState('');
-<<<<<<< HEAD
-  const [currentRemainingTime, setCurrentRemainingTime] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
-
-  useEffect(() => {
-    if (statusData?.remainingTime) {
-      // Initialize the countdown timer with seconds
-      const initialTime = {
-        days: statusData.remainingTime.days,
-        hours: statusData.remainingTime.hours,
-        minutes: statusData.remainingTime.minutes,
-        seconds: 0 // Initialize seconds
-      };
-      
-      setCurrentRemainingTime(initialTime);
-      
-      // Update countdown every second
-      const timer = setInterval(() => {
-        setCurrentRemainingTime(prevTime => {
-          if (!prevTime) return null;
-          
-          // Calculate new time (reduce by one second)
-          let newSeconds = prevTime.seconds - 1;
-          let newMinutes = prevTime.minutes;
-          let newHours = prevTime.hours;
-          let newDays = prevTime.days;
-          
-          if (newSeconds < 0) {
-            newSeconds = 59;
-            newMinutes -= 1;
-          }
-          
-          if (newMinutes < 0) {
-            newMinutes = 59;
-            newHours -= 1;
-          }
-          
-          if (newHours < 0) {
-            newHours = 23;
-            newDays -= 1;
-          }
-          
-          // Stop countdown if all zero
-          if (newDays < 0 || (newDays === 0 && newHours === 0 && newMinutes === 0 && newSeconds === 0)) {
-            clearInterval(timer);
-            return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-          }
-          
-          return { days: newDays, hours: newHours, minutes: newMinutes, seconds: newSeconds };
-        });
-      }, 1000); // Update every second
-      
-      return () => clearInterval(timer);
-    }
-  }, [statusData]);
-=======
->>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
 
   const validateInput = (): boolean => {
     setError('');
@@ -206,76 +140,12 @@ const StatusCheckForm: React.FC = () => {
       </div>
 
       {statusData && statusData.success && (
-<<<<<<< HEAD
-        <div className="status-info-card animate-fade-in">
-=======
         <div className="angpao-card animate-fade-in">
->>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
           <div className="absolute top-0 right-0 w-20 h-20 opacity-10">
             <div className="w-full h-full border-4 border-tmoney-gold rounded-full"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 border-4 border-tmoney-gold rounded-full"></div>
           </div>
           
-<<<<<<< HEAD
-          <div className="status-info-header">
-            <span className="status-info-icon">
-              <Gift size={24} color="#FFD700" />
-            </span>
-            <h3 className="status-info-title">ข้อมูลการดักซอง</h3>
-          </div>
-          
-          <div className="info-row">
-            <div className="info-label">
-              <User size={16} className="mr-2" />
-              เบอร์โทรศัพท์
-            </div>
-            <div className="info-value">{statusData.phone}</div>
-          </div>
-          
-          <div className="info-row">
-            <div className="info-label">
-              <CreditCard size={16} className="mr-2" />
-              ยอดเงินที่ดักได้
-            </div>
-            <div className="info-value gold">{statusData.totalAmount || "0"} บาท</div>
-          </div>
-          
-          <div className="info-row">
-            <div className="info-label">
-              <Calendar size={16} className="mr-2" />
-              วันหมดอายุ
-            </div>
-            <div className="info-value">
-              {statusData.expiresAt ? formatThaiDate(statusData.expiresAt) : '-'}
-            </div>
-          </div>
-          
-          <div className="info-row">
-            <div className="info-label">
-              <Clock size={16} className="mr-2" />
-              เวลาคงเหลือ
-            </div>
-            <div className="info-value">
-              {currentRemainingTime ? (
-                <div className="digital-time">
-                  <span className="countdown-number">{currentRemainingTime.days}</span>
-                  <span className="time-divider">วัน</span>
-                  <span className="countdown-number">{formatTimeSegment(currentRemainingTime.hours)}</span>
-                  <span className="time-divider">:</span>
-                  <span className="countdown-number">{formatTimeSegment(currentRemainingTime.minutes)}</span>
-                  <span className="time-divider">:</span>
-                  <span className="countdown-number animated-count">{formatTimeSegment(currentRemainingTime.seconds)}</span>
-                </div>
-              ) : (
-                statusData.remainingTime ? formatRemainingTime(statusData.remainingTime) : '-'
-              )}
-            </div>
-          </div>
-          
-          <div className="status-badge-container">
-            <span className="status-badge-active">
-              <CheckCircle size={16} className="mr-2" />
-=======
           <h3 className="text-lg font-bold mb-3 gold-accent">ข้อมูลการดักซอง</h3>
           
           <div className="mb-2 flex items-center">
@@ -304,7 +174,6 @@ const StatusCheckForm: React.FC = () => {
           
           <div className="mt-4 text-right">
             <span className="status-badge bg-green-700 text-white">
->>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
               ใช้งานได้
             </span>
           </div>

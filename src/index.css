@@ -28,15 +28,6 @@
 
   * {
     @apply border-border;
-<<<<<<< HEAD
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, supported by Chrome and Opera */
-=======
->>>>>>> 5be0146a4321e621a5343044c0835e856c1fda2a
   }
   
   body {
