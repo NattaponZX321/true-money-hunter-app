@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 
 const API_BASE_URL = 'https://4c78f910-fb19-49ef-b670-077fb079f6f8-00-1qignk7q963ov.pike.replit.dev';
@@ -24,6 +25,33 @@ export const submitPhone = async (phone: string, apiKey: string) => {
     return {
       success: false,
       message: 'เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์ กรุณาลองใหม่อีกครั้ง',
+    };
+  }
+};
+
+export const generateApiKey = async () => {
+  try {
+    const response = await api.get('/generate-key');
+    return response.data;
+  } catch (error) {
+    console.error('Error generating API key:', error);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        return {
+          success: false,
+          message: 'API endpoint สำหรับการสร้าง API key ไม่พบ กรุณาตรวจสอบ URL',
+        };
+      }
+      if (error.code === 'ERR_NETWORK') {
+        return {
+          success: false,
+          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
+        };
+      }
+    }
+    return {
+      success: false,
+      message: 'เกิดข้อผิดพลาดในการสร้าง API key กรุณาลองใหม่อีกครั้ง',
     };
   }
 };

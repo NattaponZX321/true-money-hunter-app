@@ -7,7 +7,6 @@ import RegisterForm from '../components/RegisterForm';
 import StatusCheckForm from '../components/StatusCheckForm';
 import HelpInstructions from '../components/HelpInstructions';
 import HomeScreen from '../components/HomeScreen';
-import BotLoginForm from '../components/BotLoginForm';
 import '@fontsource/prompt/400.css';
 import '@fontsource/prompt/500.css';
 import '@fontsource/prompt/700.css';
@@ -28,8 +27,6 @@ const Index = () => {
         return <HomeScreen onNavigate={setActiveTab} />;
       case 'register':
         return <RegisterForm />;
-      case 'botlogin':
-        return <BotLoginForm />;
       case 'status':
         return <StatusCheckForm />;
       case 'help':
@@ -43,8 +40,7 @@ const Index = () => {
   useEffect(() => {
     const titles: Record<string, string> = {
       home: 'TrueMoney Catcher | ดักซองอังเปา',
-      register: 'เพิ่มเบอร์ดักซอง | TrueMoney Catcher',
-      botlogin: 'ล็อกอินบอท | TrueMoney Catcher',
+      register: 'จัดการบริการ | TrueMoney Catcher',
       status: 'เช็คสถานะ | TrueMoney Catcher',
       help: 'วิธีใช้งาน | TrueMoney Catcher'
     };
