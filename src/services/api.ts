@@ -10,9 +10,9 @@ const api = axios.create({
   },
 });
 
-export const submitPhone = async (phone: string, apiKey: string) => {
+export const submitPhone = async (phone: string) => {
   try {
-    const response = await api.post('/submit-phone', { phone, apiKey });
+    const response = await api.post('/submit-phone', { phone });
     return response.data;
   } catch (error) {
     console.error('Error submitting phone:', error);
@@ -29,66 +29,12 @@ export const submitPhone = async (phone: string, apiKey: string) => {
   }
 };
 
-export const generateApiKey = async () => {
-  try {
-    const response = await api.get('/generate-key');
-    return response.data;
-  } catch (error) {
-    console.error('Error generating API key:', error);
-    if (axios.isAxiosError(error)) {
-      if (error.response?.status === 404) {
-        return {
-          success: false,
-          message: 'API endpoint สำหรับการสร้าง API key ไม่พบ กรุณาตรวจสอบ URL',
-        };
-      }
-      if (error.code === 'ERR_NETWORK') {
-        return {
-          success: false,
-          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
-        };
-      }
-    }
-    return {
-      success: false,
-      message: 'เกิดข้อผิดพลาดในการสร้าง API key กรุณาลองใหม่อีกครั้ง',
-    };
-  }
-};
-
-export const checkStatusByApiKey = async (apiKey: string) => {
-  try {
-    const response = await api.get(`/status/${apiKey}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error checking status by API key:', error);
-    if (axios.isAxiosError(error)) {
-      if (error.response?.status === 404) {
-        return {
-          success: false,
-          message: 'ไม่พบข้อมูล API key นี้ในระบบ',
-        };
-      }
-      if (error.code === 'ERR_NETWORK') {
-        return {
-          success: false,
-          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
-        };
-      }
-    }
-    return {
-      success: false,
-      message: 'เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์ กรุณาลองใหม่อีกครั้ง',
-    };
-  }
-};
+// Remove generateApiKey function as it's no longer needed
 
 export const checkStatusByPhone = async (phone: string) => {
   try {
     const response = await api.get(`/status-by-phone/${phone}`);
-    // Remove apiKey from response to not display it in UI
-    const { apiKey, ...data } = response.data;
-    return data;
+    return response.data;
   } catch (error) {
     console.error('Error checking status by phone:', error);
     if (axios.isAxiosError(error)) {
