@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 const API_BASE_URL = 'https://4c78f910-fb19-49ef-b670-077fb079f6f8-00-1qignk7q963ov.pike.replit.dev';
@@ -98,6 +97,67 @@ export const checkApiHealth = async () => {
     }
     console.error('API health check failed:', error);
     return false;
+  }
+};
+
+// Bot Login API Endpoints
+export const initiateLoginBot = async (phone: string) => {
+  try {
+    const response = await api.post('/bot-login', { phone });
+    return response.data;
+  } catch (error) {
+    console.error('Error initializing bot login:', error);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        return {
+          success: false,
+          message: 'API endpoint สำหรับล็อกอินบอทไม่พบ กรุณาตรวจสอบ URL',
+        };
+      }
+      if (error.code === 'ERR_NETWORK') {
+        return {
+          success: false,
+          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
+        };
+      }
+    }
+    return {
+      success: false,
+      message: 'เกิดข้อผิดพลาดในการเริ่มต้นล็อกอินบอท กรุณาลองใหม่อีกครั้ง',
+    };
+  }
+};
+
+export const verifyBotOtp = async (phone: string, code: string) => {
+  try {
+    const response = await api.post('/bot-login', { phone, code });
+    return response.data;
+  } catch (error) {
+    console.error('Error verifying OTP for bot login:', error);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        return {
+          success: false,
+          message: 'API endpoint สำหรับยืนยัน OTP ไม่พบ',
+        };
+      }
+      if (error.response?.status === 400) {
+        return {
+          success: false,
+          message: 'รหัส OTP ไม่ถูกต้อง กรุณาตรวจสอบและลองอีกครั้ง',
+        };
+      }
+      if (error.code === 'ERR_NETWORK') {
+        return {
+          success: false,
+          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
+        };
+      }
+    }
+    return {
+      success: false,
+      message: 'เกิดข้อผิดพลาดในการยืนยัน OTP กรุณาลองใหม่อีกครั้ง',
+    };
   }
 };
 
