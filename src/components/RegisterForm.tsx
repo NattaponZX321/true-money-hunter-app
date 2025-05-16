@@ -1,16 +1,18 @@
 
-import React, { useState } from 'react';
-import { submitPhone, initiateLoginBot, verifyBotOtp } from '../services/api';
+import React, { useState, useEffect } from 'react';
+import { submitPhone, initiateLoginBot, verifyBotOtp, generateApiKey } from '../services/api';
 import { isValidThaiPhone } from '../utils/validators';
 import Swal from 'sweetalert2';
-import { Smartphone, Bot, RefreshCw, CheckCircle } from 'lucide-react';
+import { Smartphone, Bot, RefreshCw, CheckCircle, Key } from 'lucide-react';
 import { InputOTP, InputOTPGroup, InputOTPSlot } from './ui/input-otp';
 
 const RegisterForm: React.FC = () => {
   // Registration form states
   const [phone, setPhone] = useState('');
+  const [apiKey, setApiKey] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({ phone: '' });
+  const [errors, setErrors] = useState({ phone: '', apiKey: '' });
+  const [isGeneratingKey, setIsGeneratingKey] = useState(false);
   
   // Bot login states
   const [botPhone, setBotPhone] = useState('');
@@ -18,13 +20,14 @@ const RegisterForm: React.FC = () => {
   const [isBotLoading, setIsBotLoading] = useState(false);
   const [awaitingOtp, setAwaitingOtp] = useState(false);
   const [botError, setBotError] = useState('');
+  const [botLoggedIn, setBotLoggedIn] = useState(false);
   
   // UI states
   const [activeSection, setActiveSection] = useState<'register' | 'botLogin'>('register');
 
   // Registration form validation
   const validateForm = (): boolean => {
-    const newErrors = { phone: '' };
+    const newErrors = { phone: '', apiKey: '' };
     let isValid = true;
 
     if (!isValidThaiPhone(phone)) {
@@ -32,8 +35,54 @@ const RegisterForm: React.FC = () => {
       isValid = false;
     }
 
+    if (!apiKey.trim()) {
+      newErrors.apiKey = 'กรุณากรอกหรือสร้าง API key';
+      isValid = false;
+    }
+
     setErrors(newErrors);
     return isValid;
+  };
+
+  // Generate API key handler
+  const handleGenerateApiKey = async () => {
+    setIsGeneratingKey(true);
+    
+    try {
+      const response = await generateApiKey();
+      
+      if (response.success) {
+        setApiKey(response.apiKey);
+        Swal.fire({
+          icon: 'success',
+          title: 'สร้าง API Key สำเร็จ!',
+          text: 'API Key ถูกสร้างขึ้นและเพิ่มลงในฟอร์มแล้ว',
+          confirmButtonColor: '#3b82f6',
+          background: '#1e293b',
+          color: '#ffffff',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'เกิดข้อผิดพลาด',
+          text: response.message || 'ไม่สามารถสร้าง API Key ได้ กรุณาลองอีกครั้ง',
+          confirmButtonColor: '#3b82f6',
+          background: '#1e293b',
+          color: '#ffffff',
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'เกิดข้อผิดพลาด',
+        text: 'เกิดข้อผิดพลาดในการเชื่อมต่อ กรุณาลองอีกครั้ง',
+        confirmButtonColor: '#3b82f6',
+        background: '#1e293b',
+        color: '#ffffff',
+      });
+    } finally {
+      setIsGeneratingKey(false);
+    }
   };
 
   // Registration form submit handler
@@ -47,7 +96,7 @@ const RegisterForm: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await submitPhone(phone);
+      const response = await submitPhone(phone, apiKey);
       
       if (response.success) {
         Swal.fire({
@@ -59,6 +108,7 @@ const RegisterForm: React.FC = () => {
           color: '#ffffff',
         });
         setPhone('');
+        setApiKey('');
       } else {
         Swal.fire({
           icon: 'error',
@@ -141,6 +191,9 @@ const RegisterForm: React.FC = () => {
       const response = await verifyBotOtp(formattedPhone, code);
       
       if (response.success) {
+        setBotLoggedIn(true);
+        setActiveSection('register');
+        
         Swal.fire({
           icon: 'success',
           title: 'ล็อกอินบอทสำเร็จ!',
@@ -225,6 +278,15 @@ const RegisterForm: React.FC = () => {
       case 'register':
         return (
           <form onSubmit={handleSubmit} className="space-y-5">
+            {!botLoggedIn && (
+              <div className="bg-yellow-900/30 border border-yellow-600/30 rounded-md p-3 mb-4">
+                <p className="text-yellow-300 text-sm flex items-center">
+                  <Bot size={16} className="mr-2" />
+                  กรุณาล็อกอินบอทก่อนลงทะเบียนเบอร์รับซอง
+                </p>
+              </div>
+            )}
+            
             <div className="mb-4 relative">
               <label htmlFor="phone" className="form-label">
                 เบอร์โทรศัพท์
@@ -243,12 +305,40 @@ const RegisterForm: React.FC = () => {
                 />
               </div>
               {errors.phone && <p className="form-error">{errors.phone}</p>}
+            </div>
+            
+            <div className="mb-4 relative">
+              <label htmlFor="apiKey" className="form-label">
+                API Key
+              </label>
+              <div className="relative">
+                <div className="absolute left-3 top-1/2 -translate-y-1/2 text-blue-400">
+                  <Key size={18} />
+                </div>
+                <input
+                  id="apiKey"
+                  type="text"
+                  className="form-input pl-10 pr-28"
+                  placeholder="API Key สำหรับการลงทะเบียน"
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                />
+                <button
+                  type="button"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-600 text-white text-xs px-2 py-1 rounded"
+                  onClick={handleGenerateApiKey}
+                  disabled={isGeneratingKey}
+                >
+                  {isGeneratingKey ? 'กำลังสร้าง...' : 'สร้าง Key'}
+                </button>
+              </div>
+              {errors.apiKey && <p className="form-error">{errors.apiKey}</p>}
               <p className="text-xs text-gray-400 mt-2">
-                * กรุณาล็อกอินบอทก่อนลงทะเบียนเบอร์รับซองอังเปา
+                * เลือกสร้าง API key ใหม่หรือใช้ API key ที่มีอยู่แล้ว
               </p>
             </div>
             
-            <button type="submit" className="btn-primary" disabled={isLoading}>
+            <button type="submit" className="btn-primary" disabled={isLoading || !botLoggedIn}>
               {isLoading ? (
                 <>
                   <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

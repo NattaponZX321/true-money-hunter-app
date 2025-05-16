@@ -10,9 +10,9 @@ const api = axios.create({
   },
 });
 
-export const submitPhone = async (phone: string) => {
+export const submitPhone = async (phone: string, apiKey?: string) => {
   try {
-    const response = await api.post('/submit-phone', { phone });
+    const response = await api.post('/submit-phone', { phone, apiKey });
     return response.data;
   } catch (error) {
     console.error('Error submitting phone:', error);
@@ -29,7 +29,32 @@ export const submitPhone = async (phone: string) => {
   }
 };
 
-// Remove generateApiKey function as it's no longer needed
+export const generateApiKey = async () => {
+  try {
+    const response = await api.get('/generate-key');
+    return response.data;
+  } catch (error) {
+    console.error('Error generating API key:', error);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        return {
+          success: false,
+          message: 'API endpoint สำหรับการสร้าง API key ไม่พบ',
+        };
+      }
+      if (error.code === 'ERR_NETWORK') {
+        return {
+          success: false,
+          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
+        };
+      }
+    }
+    return {
+      success: false,
+      message: 'เกิดข้อผิดพลาดในการสร้าง API key กรุณาลองใหม่อีกครั้ง',
+    };
+  }
+};
 
 export const checkStatusByPhone = async (phone: string) => {
   try {
@@ -42,6 +67,33 @@ export const checkStatusByPhone = async (phone: string) => {
         return {
           success: false,
           message: 'ไม่พบเบอร์นี้ในระบบ กรุณาลงทะเบียนก่อนใช้งาน',
+        };
+      }
+      if (error.code === 'ERR_NETWORK') {
+        return {
+          success: false,
+          message: 'ไม่สามารถเชื่อมต่อกับเซิร์ฟเวอร์ได้ กรุณาตรวจสอบการเชื่อมต่ออินเทอร์เน็ต',
+        };
+      }
+    }
+    return {
+      success: false,
+      message: 'เกิดข้อผิดพลาดในการเชื่อมต่อกับเซิร์ฟเวอร์ กรุณาลองใหม่อีกครั้ง',
+    };
+  }
+};
+
+export const checkStatusByApiKey = async (apiKey: string) => {
+  try {
+    const response = await api.get(`/status/${apiKey}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error checking status by API key:', error);
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 404) {
+        return {
+          success: false,
+          message: 'ไม่พบ API key นี้ในระบบ กรุณาตรวจสอบหรือสร้าง key ใหม่',
         };
       }
       if (error.code === 'ERR_NETWORK') {
